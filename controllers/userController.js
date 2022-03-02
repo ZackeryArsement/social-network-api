@@ -1,6 +1,4 @@
-const { CountryCodes } = require('validator/lib/isISO31661Alpha2');
 const { Thought, User } = require('../models');
-const thoughtController = require('./thoughtController');
 
 module.exports = {
     // GET all users
@@ -69,10 +67,9 @@ module.exports = {
     // POST new friend to user friend list
     addFriend(req,res) {
         console.log('You are adding a friend');
-        console.log(req.body);
         User.findOneAndUpdate(
             { _id: req.params.userId },
-            { $addToSet: { friends: req.body }},
+            { $addToSet: { friends: { _id: req.params.friendId}}},
             { runValidators: true, new: true }
         )
         .then((user) => 
@@ -87,13 +84,13 @@ module.exports = {
     removeFriend(req,res) {
         User.findOneAndUpdate(
             { _id: req.params.userId },
-            { $pull: { friend: { _id: req.params.friendId}}},
+            { $pull: { friends: req.params.friendId}},
             { runValidators: true, new: true }
         )
         .then((user) => 
             !user
-                ? res.status(404).json({ message: 'No user found with that ID :(' })
-                : res.json(student)
+                ? res.status(404).json({ message: 'No friend found with that ID :(' })
+                : res.json(user)
         )
         .catch((err) => res.status(500).json(err));
     },

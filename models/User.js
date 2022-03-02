@@ -1,5 +1,4 @@
 const { Schema, model } = require('mongoose');
-import { isEmail } from 'validator';
 
 const userSchema = new Schema(
     {
@@ -13,7 +12,7 @@ const userSchema = new Schema(
             type: String,
             required: true,
             unique: true,
-            validate: [ isEmail, 'invalid email' ],
+            validate: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/
         },
         thoughts: [
             {

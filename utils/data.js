@@ -1,0 +1,138 @@
+const names = [
+    'Aaran',
+    'Aaren',
+    'Aarez',
+    'Aarman',
+    'Aaron',
+    'Aaron-James',
+    'Aarron',
+    'Aaryan',
+    'Aaryn',
+    'Aayan',
+    'Aazaan',
+    'Abaan',
+    'Abbas',
+    'Abdallah',
+    'Abdalroof',
+    'Abdihakim',
+    'Abdirahman',
+    'Abdisalam',
+    'Abdul',
+    'Abdul-Aziz',
+    'Abdulbasir',
+    'Abdulkadir',
+    'Abdulkarem',
+    'Smith',
+    'Jones',
+    'Coollastname',
+    'enter_name_here',
+    'Ze',
+    'Zechariah',
+    'Zeek',
+    'Zeeshan',
+    'Zeid',
+    'Zein',
+    'Zen',
+    'Zendel',
+    'Zenith',
+    'Zennon',
+    'Zeph',
+    'Zerah',
+    'Zhen',
+    'Zhi',
+    'Zhong',
+    'Zhuo',
+    'Zi',
+    'Zidane',
+    'Zijie',
+    'Zinedine',
+    'Zion',
+    'Zishan',
+    'Ziya',
+    'Ziyaan',
+    'Zohaib',
+    'Zohair',
+    'Zoubaeir',
+    'Zubair',
+    'Zubayr',
+    'Zuriel',
+    'Xander',
+    'Jared',
+    'Courtney',
+    'Gillian',
+    'Clark',
+    'Jared',
+    'Grace',
+    'Kelsey',
+    'Tamar',
+    'Alex',
+    'Mark',
+    'Tamar',
+    'Farish',
+    'Sarah',
+    'Nathaniel',
+    'Parker',
+  ];
+  
+const text = [
+  'Have you ever wondered?',
+  'I just had a good idea.',
+  'Apple is better than Android.',
+  'Microsoft is better than Mac',
+  'Blue moons occur around every 2 or 3 years',
+  'Monopoly is a really cool boardgame',
+  'Halloween will never fall on a Friday 13th',
+  'Hello world!',
+  'Coding is pretty cool!',
+  'Logging your dreams is a neat thing to do.',
+  'Don\'t forget to brush your teeth!',
+];
+
+const possibleReactions = [
+  'I disagree!',
+  'I tried your algorithm, here were the results',
+  'This was awesome',
+  'Thank you for the great content',
+  'Please check out my video response',
+  'Like and subscribe to my channel please',
+  'Reply: The side effects of in app purchases on digital marketplaces',
+];
+  
+  // Get a random item given an array
+  const getRandomArrItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
+  
+  // Gets a random full name
+  const getRandomName = () =>
+    `${getRandomArrItem(names)} ${getRandomArrItem(names)}`;
+  
+  // Function to generate random assignments that we can add to student object.
+  const getRandomThought = (int) => {
+    const results = [];
+    for (let i = 0; i < int; i++) {
+      results.push({
+        thoughtText: getRandomArrItem(text),
+        username: getRandomName(),
+        reactions: [...getThoughtReactions(2)],
+      });
+    }
+    return results;
+  };
+
+  // Create the responses that will be added to each video
+const getThoughtReactions = (int) => {
+  if (int === 1) {
+    return getRandomArrItem(possibleReactions);
+  }
+  let results = [];
+  for (let i = 0; i < int; i++) {
+    results.push({
+      reactionBody: getRandomArrItem(possibleReactions),
+      username: getRandomName(),
+    });
+  }
+  return results;
+};
+  
+  // Export the functions for use in seed.js
+  module.exports = { getRandomName, getRandomThought };
+  
